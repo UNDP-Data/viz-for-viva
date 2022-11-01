@@ -249,7 +249,7 @@ a.undp-style:focus-visible {
 }
 
 .bold {
-  font-weight: bold;
+  font-weight: bold !important;
 }
 
 .italics {
