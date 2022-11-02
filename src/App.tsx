@@ -59,7 +59,7 @@ const App = () => {
     }
   }, []);
   return (
-    <div className='undp-container' style={{ maxWidth: '960px' }}>
+    <div className='undp-container' style={{ maxWidth: '992px' }}>
       {
         data
           ? (
