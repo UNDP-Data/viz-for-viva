@@ -64,27 +64,42 @@ const App = () => {
         data
           ? (
             <>
-              <div className='flex-div margin-bottom-05' style={{ gap: '4rem', justifyContent: 'center' }}>
-                <div className='flex-div flex-vert-align-center' style={{ gap: '5px' }}>
-                  <ColorEl color='#3288CE' />
-                  <div>
-                    Budget:
-                    {' '}
-                    <span className='bold'>
+              <div className='flex-div margin-bottom-09'>
+                <StatCardsDiv width='50%'>
+                  <div className='stat-card'>
+                    <h2>
                       $
                       {format('.2s')(sumBy(data, (d: any) => d.data.budget))}
-                    </span>
+
+                    </h2>
+                    <p>Total Budget</p>
                   </div>
-                </div>
-                <div className='flex-div flex-vert-align-center' style={{ gap: '5px' }}>
-                  <ColorEl color='#82B6E0' />
-                  <div>
-                    Expenditure:
-                    {' '}
-                    <span className='bold'>
+                </StatCardsDiv>
+                <StatCardsDiv width='50%'>
+                  <div className='stat-card'>
+                    <h2>
                       $
                       {format('.2s')(sumBy(data, (d: any) => d.data.expenditure))}
-                    </span>
+
+                    </h2>
+                    <p>Total Expenditure</p>
+                  </div>
+                </StatCardsDiv>
+              </div>
+              <div className='flex-div margin-bottom-05 flex-space-between flex-vert-align-center'>
+                <h5 className='undp-typography margin-bottom-00'>Budget & Expenditure by Projects</h5>
+                <div className='flex-div'>
+                  <div className='flex-div flex-vert-align-center' style={{ gap: '5px' }}>
+                    <ColorEl color='#3288CE' />
+                    <div>
+                      Budget
+                    </div>
+                  </div>
+                  <div className='flex-div flex-vert-align-center' style={{ gap: '5px' }}>
+                    <ColorEl color='#82B6E0' />
+                    <div>
+                      Expenditure
+                    </div>
                   </div>
                 </div>
               </div>
@@ -112,6 +127,24 @@ const App = () => {
                         height={d.y1 - (d.y0 + ((1 - (d.data.expenditure / d.data.budget)) * (d.y1 - d.y0)))}
                         fill='#82B6E0'
                       />
+                      {
+                        d.x1 - d.x0 > 250 && d.y1 - d.y0 > 20
+                          ? (
+                            <text
+                              x={d.x0}
+                              y={d.y0}
+                              dx={5}
+                              dy={15}
+                              fontSize={12}
+                              fill='#fff'
+                            >
+                              {
+                                d.data.length > Math.round(d.x1 - d.x0 / 5.5) ? `${d.data.title.subString(0, Math.round(d.x1 - d.x0 / 5.5))}...` : d.data.title
+                              }
+                            </text>
+                          )
+                          : null
+                      }
                     </g>
                   ))
                 }
